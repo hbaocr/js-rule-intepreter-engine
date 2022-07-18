@@ -91,3 +91,8 @@ console.log(res);
   result: { riskFactor: 62.5, stratification: 'RED' }
 }
 ```
+
+## Reference
+* https://nodejs.org/api/vm.html
+* https://github.com/patriksimek/vm2
+
