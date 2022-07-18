@@ -4,8 +4,6 @@ const fs = require('fs');
 
 let engine = new Engine();
 
-
-
 let pat_response = {
     questions: [
         {
