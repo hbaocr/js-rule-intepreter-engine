@@ -19,7 +19,7 @@ let pat_response = {
             'quesiton-type':'subjective',
             'response-type':'multiple-choice',
             'stratificaton-level':'',
-            '0':0,
+            '0':0.1,
             'total_weight':0,
             'length':1 // 3 options
         },
@@ -46,6 +46,24 @@ let careplan ={
         }
     }
 }
+
+function compute_total_weight(pat_response){
+    for(let i=0;i<pat_response.questions.length;i++){
+        if(pat_response.questions[i]['quesiton-type']=='objective') continue;
+
+        let ql= pat_response.questions[i].length||0;
+        let total_w =0;
+        for(let k=0;k<ql;k++){
+           let w= pat_response.questions[i][k]||0;
+           total_w = total_w+w;
+        }
+        pat_response.questions[i]['total_weight']=total_w;
+    }
+    return pat_response;
+}
+
+pat_response =  compute_total_weight(pat_response);
+
 
 let rule_code = fs.readFileSync('./HTNRule.js','utf-8');
 let res = engine.exe(rule_code,pat_response,careplan);
